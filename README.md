@@ -21,4 +21,6 @@ Proxmox VE is an open-source server management platform for enterprise virtualiz
 
 The local k3s cluster supports load balancer (**MetalLB**), ingress controller (**Traefik**), and self-signed TLS certificate (**Cert-Manager**).
 
+![](docs/dashboard.png)
+
 ![](docs/app.png)
