@@ -30,21 +30,23 @@ We create the k3s cluster using Ubuntu VMs cloned from a template. The template 
 # Create Ubuntu Cloud Image
 $ curl -O http://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img
 $ sudo apt install libguestfs-tools -y
-$ sudo virt-customize -a ubuntu-20.04-server-cloudimg-amd64.img --install qemu-guest-agent
 $ sudo virt-customize -a ubuntu-20.04-server-cloudimg-amd64.img --install qemu-guest-agent --truncate /etc/machine-id 
 
 # Create a template VM
-$ qm create 9001 \
-    --name ubuntu-20.04-cloud-init --numa 0 --ostype l26 \
-    --cpu cputype=host --cores 1 --sockets 1 \
-    --memory 1024  \
-    --net0 virtio,bridge=vmbr0
-$ qm importdisk 9001 ubuntu-20.04-server-cloudimg-amd64.img local-lvm
-$ qm set 9001 --scsihw virtio-scsi-pci --scsi0 local-lvm:vm-9001-disk-0
-$ qm set 9001 --ide2 local-lvm:cloudinit
-$ qm set 9001 --boot c --bootdisk scsi0
-$ qm set 9001 --serial0 socket --vga serial0
-$ qm set 9001 --agent enabled=1
+$ sudo qm create 9000 \
+         --name ubuntu-20.04-cloud-init --numa 0 --ostype l26 \
+         --cpu cputype=host --cores 1 --sockets 1 \
+         --memory 1024  \
+         --net0 virtio,bridge=vmbr0
+
+# Replace local with your local storage (e.g. local-lvm)
+$ sudo qm importdisk 9000 ubuntu-20.04-server-cloudimg-amd64.img local  -format qcow2
+$ sudo qm set 9000 --scsihw virtio-scsi-pci --scsi0 /var/lib/vz/images/9000/vm-9000-disk-0.qcow2
+$ sudo qm resize 9000 scsi0 +6G
+$ sudo qm set 9000 --ide2 local:cloudinit
+$ sudo qm set 9000 --boot c --bootdisk scsi0
+$ sudo qm set 9000 --serial0 socket --vga serial0
+$ sudo qm set 9000 --agent enabled=1
 ```
 
 Then, you can set up cloud init from web interface (e.g. ssh public key):
@@ -54,7 +56,7 @@ Then, you can set up cloud init from web interface (e.g. ssh public key):
 Lastly, create the template.
 
 ```
-$ qm template 9001
+$ qm template 9000
 ```
 
 We can create three Ubuntu VMs from the template:
