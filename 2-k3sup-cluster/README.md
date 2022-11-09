@@ -14,6 +14,7 @@ Now we are ready to set up the k3s cluster.
 # Make sure you can ssh into each machine without password
 
 # k3s master
+# You may consider increasing the memory of the master node to be 2GB 
 $ k3sup install --ip 192.168.1.130 --user ubuntu
 
 # k3s worker1
@@ -31,6 +32,19 @@ $ kubectl get node -o wide
 **Congratulations! The k3s cluster is ready for deployment.**
 
 --------
+
+### Optional (Swap Area)
+
+```
+## Swap Area
+
+$ sudo fallocate -l 1G /swapfile
+$ sudo mkswap /swapfile
+$ sudo swapon /swapfile
+$ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+$ sudo sysctl vm.swappiness=10
+$ echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+```
 
 ### Clean up (if anything goes wrong)
 
