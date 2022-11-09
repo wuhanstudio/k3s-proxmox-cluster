@@ -22,15 +22,25 @@ $ k3sup join --ip 192.168.1.114 --server-ip 192.168.1.130 --user ubuntu
 
 # k3s worker2
 $ k3sup join --ip 192.168.1.115 --server-ip 192.168.1.130 --user ubuntu
+```
 
+**Congratulations! The k3s cluster is ready for deployment.**
+
+```
 # Test your cluster with:
 $ export KUBECONFIG=/home/wuhanstudio/kubeconfig
 $ kubectl config use-context default
 $ kubectl get node -o wide
 ```
 
-**Congratulations! The k3s cluster is ready for deployment.**
+Outputs:
 
+```
+NAME      STATUS   ROLES                  AGE   VERSION
+master    Ready    control-plane,master   53m   v1.25.3+k3s1
+worker1   Ready    <none>                 50m   v1.25.3+k3s1
+worker2   Ready    <none>                 46m   v1.25.3+k3s1
+```
 --------
 
 ### Optional (Swap Area)
