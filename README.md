@@ -2,9 +2,9 @@
 
 > A local k3s cluster that supports Load Balancer, Ingress Controller, and Cert Manager.
 
-- Step 1: Install Proxmox
-- Step 2: Set up K3s Cluster
-- Step 3: Install Application (MetalLB, Traefik, Cert-Manager)
+- Step 1: Install Proxmox.
+- Step 2: Set up K3s Cluster.
+- Step 3: Install Application (MetalLB, Traefik, Cert-Manager).
 
 ### Requirements
 
@@ -19,6 +19,6 @@ Proxmox VE is an open-source server management platform for enterprise virtualiz
 
 ### K3S Cluster
 
-The local k3s cluster supports loca balancer (MetalLB), ingress controller (Traefik), and self-signed TLS certificate (Cert-Manager).
+The local k3s cluster supports load balancer (**MetalLB**), ingress controller (**Traefik**), and self-signed TLS certificate (**Cert-Manager**).
 
 ![](docs/app.png)
