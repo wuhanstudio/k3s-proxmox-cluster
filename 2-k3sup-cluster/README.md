@@ -28,9 +28,11 @@ $ kubectl config use-context default
 $ kubectl get node -o wide
 ```
 
-Congratulations! The k3s cluster is ready for deployment.
+**Congratulations! The k3s cluster is ready for deployment.**
 
-#### Clean up (if anything goes wrong)
+--------
+
+### Clean up (if anything goes wrong)
 
 To uninstall K3s from a server node, run:
 
