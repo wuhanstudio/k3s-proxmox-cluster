@@ -6,6 +6,8 @@
 - [Step 2: Set up K3s Cluster](2-k3sup-cluster/README.md).
 - [Step 3: Install Application (MetalLB, Traefik, Cert-Manager)](3-deployment/README.md).
 
+![](docs/intro.png)
+
 ### Requirements
 
 - A Router.
