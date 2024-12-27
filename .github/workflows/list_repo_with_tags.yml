@@ -1,0 +1,49 @@
+#
+# Autor.: Joao Rafael F. Bonilha - Foursys
+# E-mail.: joao.bonilha@foursys.com.br
+# Data_Criacao.: 20/12/2024
+#
+# Variaveis usadas.:
+# GITHUB_TOKEN.: Token de acesso a API do GitHub
+#
+ 
+- name: Listar Repositorios e Tags, se existirem
+ 
+  on:
+  workflow_dispatch:
+ 
+  jobs:
+  list-repos:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v3
+ 
+      - name: Obtendo a lista dos repositorios
+        id: repos
+        run: |
+          curl -H "Authorization: token ${{ secrets.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 }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/rafaelbonilha/repos?per_page=100" \
+          -o repos.json
+ 
+      - name: Listando os repositorios
+        run: |
+          echo "Repositorios: " \
+          jq -r '.[].name' repos.json
+        
+  list-tags:
+    runs-on: ubuntu-latest
+    needs: list-repos
+    steps:
+      - name: Obter as tags dos repositorios
+        run: |
+          for repo in $(jq -r '.[].name' repos.json); do
+          echo "Obtendo as tags do repositorio: $repo"
+          curl -H "Authorization: token ${{ secrets.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}}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          "https://api.github.com/repos/${{ github.repository_owner }}/$repo/tags" \
+          -o tags_$repo.json
+          echo "Tags for $repo:" jq -r '.[].name' tags_$repo.json
+          done
+
