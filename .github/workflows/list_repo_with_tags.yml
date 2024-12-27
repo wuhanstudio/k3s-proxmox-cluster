@@ -6,7 +6,8 @@
 # Variaveis usadas.:
 # GITHUB_TOKEN.: Token de acesso a API do GitHub
 #
- 
+
+# Lista todos os repositorios 
 name: Listar Repositorios
  
 on:
@@ -32,7 +33,7 @@ jobs:
           echo "Repositorios: " \
           jq -r '.[].name' repos.json
           
-  # Lista Tags, se existirem      
+  # Lista as Tags, se existirem      
   list-tags:
     runs-on: ubuntu-latest
     needs: list-repos
