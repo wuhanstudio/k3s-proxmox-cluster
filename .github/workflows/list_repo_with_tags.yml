@@ -7,7 +7,7 @@
 # GITHUB_TOKEN.: Token de acesso a API do GitHub
 #
  
-- name: Listar Repositorios
+name: Listar Repositorios
  
   on:
   workflow_dispatch:
