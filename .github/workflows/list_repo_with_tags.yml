@@ -9,10 +9,10 @@
  
 name: Listar Repositorios
  
-  on:
+on:
   workflow_dispatch:
  
-  jobs:
+jobs:
   list-repos:
     runs-on: ubuntu-latest
     steps:
