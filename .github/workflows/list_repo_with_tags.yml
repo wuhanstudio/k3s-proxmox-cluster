@@ -31,7 +31,8 @@ jobs:
         run: |
           echo "Repositorios: " \
           jq -r '.[].name' repos.json
-        
+          
+  # Lista Tags, se existirem      
   list-tags:
     runs-on: ubuntu-latest
     needs: list-repos
