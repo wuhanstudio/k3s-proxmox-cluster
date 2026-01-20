@@ -1,5 +1,7 @@
 ## K3S Applications
 
+> K3S has Traefik built-in now. Manually installing traefik is not requried any more.
+
 ### 1. MetalLB
 
 We first install the [Load Balancer](https://metallb.universe.tf/installation/)
